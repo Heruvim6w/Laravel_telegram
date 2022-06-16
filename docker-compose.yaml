@@ -1,0 +1,27 @@
+version: "3"
+services:
+  telegram_app_service:
+    container_name: telegram_app_service
+    restart: always
+    build: ./docker/php
+    volumes:
+      - ./xhprof:/php/xhprof/data
+      - ./:/var/www/html/telegram_app_service
+    environment:
+      - VIRTUAL_HOST=telegram_app_service.local
+      - VIRTUAL_PROTO=fastcgi
+      - VIRTUAL_PORT=9000
+      - VIRTUAL_ROOT=/var/www/html/telegram_app_service/public
+    working_dir: /var/www/html/telegram_app_service
+    ports:
+      - "3020:3000"
+      - "3021:3001"
+    extra_hosts:
+      - "telegram_app_service.local:172.17.0.1"
+    networks:
+      - devserver_default
+volumes:
+  nginx:
+networks:
+  devserver_default:
+    external: true
