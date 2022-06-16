@@ -10,3 +10,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+MadelineProto.log
+test_sess
+*.ipc
+*.ipc*
+*.lightState.*
+test_sess.*
+*.safe.php
+*.safe.php.lock
