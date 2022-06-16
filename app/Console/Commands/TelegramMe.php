@@ -19,7 +19,7 @@ class TelegramMe extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Вывод личной информации';
 
     /**
      * Create a new command instance.
@@ -40,44 +40,19 @@ class TelegramMe extends Command
     {
         $this->info('Start');
         $madeline = new API( env('TELEGRAM_SESSION_FILE') );
-        $madeline->start();
-//        $me = $madeline->contacts->getContacts(['hash'=>9223372036854775807]);
-//        $me = $madeline->contacts->search(['q'=>'Alexandr Kozhevnikov', 'limit'=>10]);
-        $inputPhoneContact = [
-            '_' => 'inputPhoneContact',
-            'client_id' => random_int(120, 200),
-            'phone' => '79234805398',
-            'first_name' => 'String',
-            'last_name' => 'String',
-        ];//624874892  1720684456 1984936575
 
-        $this->info('Contact ' . $inputPhoneContact['client_id']);
-        $me = $madeline->contacts->importContacts(['contacts' => [$inputPhoneContact]]);
-        $this->info('Contact is OK!');
-//        $me = $madeline->messages->sendMessage(['peer' => '@d_artagnan_s', 'message' => 'hi']);
+        $me = $madeline->getSelf();
 
-//        \danog\MadelineProto\Logger::log("Hi ".$me['first_name']."!");
-
-        foreach ($me['users'] as $value) {
-            var_dump($value);
-            $this->info($value);
+        foreach ($me as $key=>$value) {
+            if (!is_array($value)) {
+                $this->info($key . '=>' . $value);
+            } else {
+                foreach ($value as $k=>$v) {
+                    $this->info($k . '=>' . $v);
+                }
+            }
         }
-         //else {
-//            foreach ($me as $key => $value) {
-//                if (!is_array($value)) {
-//                    $this->info($key . '= >' . $value);
-//                } //else {
-//                    foreach ($value as $v) {
-//                        $this->info($v);
-//                    }
-//                }
-//            }
-//        }
+
         $this->info('OK!');
-//        $c = $madeline->contacts->search(['q'=>'d_artangan_s', 'limit'=>10]);
-//        $this->info($c);
-//        foreach ($madeline->getAllMethods() as $tt) {
-//            $this->info($tt);
-//        }
     }
 }

@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use danog\MadelineProto\API;
 use Illuminate\Console\Command;
 
-class TestCommand extends Command
+class TelegramStart extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'test:echo';
+    protected $signature = 'telegram:start';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Вывод чего-то';
+    protected $description = 'Авторизация в клиенте';
 
     /**
      * Create a new command instance.
@@ -45,28 +45,22 @@ class TestCommand extends Command
             // Иначе создать новую сессию
             $madeline = new API(env('TELEGRAM_SESSION_FILE'), [
                 'app_info' => [
-                    'api_id' => '19552121',
-                    'api_hash' => 'f84a39d15043c3c5454ab456ad4c42d5',
+                    'api_id' => env('TELEGRAM_API_ID'),
+                    'api_hash' => env('TELEGRAM_API_HASH'),
                 ]
             ]);
-
-            // Задать имя сессии
-//            $madeline->session = env('TELEGRAM_SESSION_FILE');
 
             // Принудительно сохранить сессию
             $madeline->serialize();
 
             // Начать авторизацию по номеру мобильного телефона
             $madeline->phone_login( env('TELEGRAM_PHONE') );
+
             // Запросить код с помощью консоли
-            $code = readline('Enter the code you received: ');
+            $code = readline('Введите полученный код: ');
+
             $madeline->complete_phone_login($code);
         }
 
-        $messages = $madeline->messages->getHistory(['peer' => '@ANY_CHANNEL_ID', 'offset_id' => 0, 'offset_date' => 0, 'add_offset' => 0, 'limit' => 10, 'max_id' => 0, 'min_id' => 0, 'hash' => 0, ]);
-
-        foreach($messages['messages'] as $msg) {
-            dump($msg);
-        }
     }
 }

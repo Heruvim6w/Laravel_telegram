@@ -19,7 +19,7 @@ class TelegramLogout extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Выход из клиента';
 
     /**
      * Create a new command instance.
@@ -40,12 +40,14 @@ class TelegramLogout extends Command
     {
         $this->info('Logout');
         $madeline = new API( env('TELEGRAM_SESSION_FILE') );
-//        $madeline->logout();
+
+        $madeline->logout();
+
         $this->info('Logout was successfully');
         $this->info('Shutdown');
-//        $madeline->shutdown();
+
         $madeline->stop();
-        exit;
+
         array_map('unlink', glob(env('TELEGRAM_SESSION_FILE')."*"));
         $this->info('Shutdown was successfully');
     }

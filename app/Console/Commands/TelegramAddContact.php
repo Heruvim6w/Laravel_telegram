@@ -19,7 +19,7 @@ class TelegramAddContact extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Импорт контакта';
 
     /**
      * Create a new command instance.
@@ -43,20 +43,22 @@ class TelegramAddContact extends Command
         $madeline->start();
         $this->info('Start is Ok!');
 
+        // Запросить данные пользователя с помощью консоли
+        $phone = readline('Введите телефон (без +. Например, 79777777777: ');
+        $first_name = readline('Введите имя: ');
+        $last_name = readline('Введите фамилию (не обязательно): ');
+
         $inputPhoneContact = [
             '_' => 'inputPhoneContact',
             'client_id' => random_int(120, 200),
-            'phone' => '79234805398',
-            'first_name' => 'String',
-            'last_name' => 'String',
-            ];//624874892
+            'phone' => $phone,
+            'first_name' => $first_name,
+            'last_name' => $last_name ?? '',
+        ];
 
         $this->info('Contact ' . $inputPhoneContact['client_id']);
         $updates = $madeline->contacts->importContacts(['contacts' => [$inputPhoneContact]]);
         $this->info('Contact is OK!');
-
-//        $updates = $madeline->contacts->importContacts([$inputPhoneContact]);
-//        $updates = $madeline->contacts->search(['q'=>'d_artangan_s', 'limit'=>10]);
 
         if (!is_array($updates)) {
             $this->info($updates);
