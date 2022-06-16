@@ -18,3 +18,10 @@ test_sess
 test_sess.*
 *.safe.php
 *.safe.php.lock
+/public/test_sess
+/public/*.ipc
+/public/*.ipc*
+/public/*.lightState.*
+/public/test_sess.*
+/public/*.safe.php
+/public/*.safe.php.lock

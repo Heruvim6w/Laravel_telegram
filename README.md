@@ -1,3 +1,27 @@
+## Клиент Telegram на Laravel
+В разработке!
+
+Есть вариант реализации полного функционала десктопного приложения в веб-среде на известном и понятном фреймворке.
+
+## Требования
+- PHP 8
+- Python 2.7
+
+## Установка
+Репозиторий содержит в себе образ для разворачивания в докере.
+1. docker-compose up -d --build
+2. docker exec -ti telegram_app_service bash (войти в контейнер)
+3. composer install (установка зависимостей)
+4. В файле hosts прописать локальный урл (Например, 127.0.0.1 tel_service.local)
+
+## Использование
+Для проверки функционала удобно использовать консольные команды.
+TelegramController.php содержит основные методы, необходимые на данный момент (список будет расширяться)
+
+## Благодарности
+Спасибо проекту https://github.com/danog/MadelineProto за удобную библиотеку для работы с Telegram API на PHP.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
