@@ -12,9 +12,12 @@ RUN apk add --no-cache \
     libxml2-dev \
     icu \
     icu-dev \
-    mysql-client
-    
+    mysql-client \
+    python2
+
 RUN apk add libpng-dev
+
+#RUN apk add --no-cache python2
 
 #RUN mkdir /usr/lib/node_modules/pngquant-bin/vendor/pngquant
 #RUN npm install -g pngquant-bin --allow-root  --unsafe-perm=true
