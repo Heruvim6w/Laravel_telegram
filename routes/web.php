@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::any('/search', '\App\Http\Controllers\TelegramController@searchContact');
-Route::any('/logout', '\App\Http\Controllers\TelegramController@logout');
-Route::get('/start', '\App\Http\Controllers\TelegramController@start');
 Route::post('/start', '\App\Http\Controllers\TelegramController@start');
-Route::any('/me', '\App\Http\Controllers\TelegramController@me');
+Route::get('/logout', '\App\Http\Controllers\TelegramController@logout');
+Route::get('/me', '\App\Http\Controllers\TelegramController@me');

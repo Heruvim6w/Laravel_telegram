@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 
-class CodeRequest extends FormRequest
+class ContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,9 @@ class CodeRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'integer',
-            'phone' => 'required|string|min:11|max:12'
+            'phone' => 'required|integer|min:11|max:12',
+            'first_name' => 'required|string|min:3',
+            'last_name' => 'string|min:3',
         ];
     }
 
